@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from database import engine, create_tables
 from schemas import CountUpdate, SchoolHouse, SchoolHouseCreate
@@ -6,6 +7,17 @@ from crud import update_schoolHouse_count, create_schoolhouse, fetch_all_schoolh
 from typing import List
 
 app = FastAPI()
+
+origins = ["*"]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 create_tables()
 
@@ -36,6 +48,4 @@ def create_schoolhouse_record(schoolhouse: SchoolHouseCreate, db: Session = Depe
 @app.get('/schoolhouses/', response_model=List[SchoolHouse])
 def get_all_schoolhouses(db: Session = Depends(get_db)):
     return fetch_all_schoolhouses(db)
-
-
 
