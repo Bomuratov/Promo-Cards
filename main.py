@@ -45,7 +45,7 @@ def create_schoolhouse_record(schoolhouse: SchoolHouseCreate, db: Session = Depe
 
 
 
-@app.get('/schoolhouses/', response_model=List[SchoolHouse])
+@app.get('/schoolhouse/', response_model=List[SchoolHouse])
 def get_all_schoolhouses(db: Session = Depends(get_db)):
     return fetch_all_schoolhouses(db)
 
