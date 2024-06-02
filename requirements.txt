@@ -1,4 +1,5 @@
 fastapi
-hypercorn==0.14.4
+uvicorn
 databases
 sqlalchemy
+gunicorn
